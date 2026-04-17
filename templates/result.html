@@ -1,0 +1,196 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>result page</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--      <p>{{res | safe}}</p>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Plan Result</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            padding: 18px 40px;
+            background: #0d1b2a;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Main Section */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* Title */
+        h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #0d1b2a;
+        }
+
+        /* Result Content */
+        .result-content {
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .result-content h3,
+        .result-content h4 {
+            color: #0077b6;
+            margin-top: 15px;
+        }
+
+        .result-content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .result-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #0077b6;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #023e8a;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .container {
+                margin: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">🌍 Travel Planner</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#">Plans</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card">
+
+            <h2>🧭 Your Travel Plan</h2>
+
+            <div class="result-content">
+                {{ res | safe }}
+            </div>
+
+            <a href="/" class="btn">🔙 Plan Another Trip</a>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2026 Travel Planner • Designed by You 🚀
+    </div>
+
+</body>
+</html>
