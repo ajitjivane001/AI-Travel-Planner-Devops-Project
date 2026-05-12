@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-travel-planner
+  labels:
+    app: ai-travel-planner
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ai-travel-planner
+  template:
+    metadata:
+      labels:
+        app: ai-travel-planner
+    spec:
+      containers:
+      - name: flask-app
+        # Update this image name based on your Docker Hub username
+        image: yourusername/ai-travel-planner:latest 
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        # Passing API Key via Environment Variable
+        env:
+        - name: GEMINI_API_KEY
+          value: "AIzaSyAhnW7vrJAtyyG3GHHcvD0GbOTSTXPbjVc" # Replace with secret management in production
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
