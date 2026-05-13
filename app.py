@@ -1,12 +1,9 @@
 import os
-import google.generativeai as genai
+from google import genai
 from flask import Flask, render_template, request
 
-# Configure API key securely
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-
-# Create model
-model = genai.GenerativeModel("gemini-pro")
+# Create client
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 app = Flask(__name__)
 
@@ -30,7 +27,10 @@ def index():
         Generate the output in clean HTML format.
         """
 
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt,
+        )
 
         result = response.text
 
