@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-travel-planner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-travel-planner
+  template:
+    metadata:
+      labels:
+        app: ai-travel-planner
+    spec:
+      containers:
+      - name: flask-app
+        image: ai-travel-planner:latest
+        imagePullPolicy: IfNotPresent # Using local image in Docker Desktop
+        ports:
+        - containerPort: 5000
+        env:
+        - name: GOOGLE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-travel-planner-secrets
+              key: GOOGLE_API_KEY
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: ai-travel-planner-config
+              key: MYSQL_HOST
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: ai-travel-planner-config
+              key: MYSQL_DATABASE
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: ai-travel-planner-config
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ai-travel-planner-secrets
+              key: MYSQL_PASSWORD
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
