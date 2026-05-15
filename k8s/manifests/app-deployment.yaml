@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: ai-travel-planner:latest
-        imagePullPolicy: IfNotPresent # Using local image in Docker Desktop
+        image: ajitjivane001/ai-travel-planner-devops-project-app:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         env:

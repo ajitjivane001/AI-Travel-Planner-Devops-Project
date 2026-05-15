@@ -16,15 +16,16 @@ spec:
     spec:
       containers:
       - name: flask-app
-        # Update this image name based on your Docker Hub username
-        image: yourusername/ai-travel-planner:latest 
+        image: ajitjivane001/ai-travel-planner-devops-project-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
-        # Passing API Key via Environment Variable
         env:
-        - name: GEMINI_API_KEY
-          value: "AIzaSyAhnW7vrJAtyyG3GHHcvD0GbOTSTXPbjVc" # Replace with secret management in production
+        - name: GOOGLE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-travel-planner-secrets
+              key: GOOGLE_API_KEY
         resources:
           requests:
             memory: "128Mi"
@@ -44,3 +45,4 @@ spec:
             port: 5000
           initialDelaySeconds: 5
           periodSeconds: 10
+
