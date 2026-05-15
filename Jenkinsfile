@@ -7,6 +7,7 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -17,7 +18,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image ${DOCKER_IMAGE}:${DOCKER_TAG}..."
-                    bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
@@ -26,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying to Kubernetes..."
-                    bat "kubectl apply -f k8s/manifests/"
+                    sh "kubectl apply -f k8s/manifests/"
                 }
             }
         }
@@ -35,8 +36,8 @@ pipeline {
             steps {
                 script {
                     echo "Verifying pods..."
-                    bat "kubectl get pods"
-                    bat "kubectl get svc"
+                    sh "kubectl get pods"
+                    sh "kubectl get svc"
                 }
             }
         }
@@ -46,9 +47,11 @@ pipeline {
         always {
             echo "Pipeline finished."
         }
+
         success {
             echo "Deployment successful!"
         }
+
         failure {
             echo "Deployment failed."
         }
